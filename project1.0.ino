@@ -1,9 +1,3 @@
-
-
-
-
-
-
 struct tulaj{
   char nev[30];
   char nept[7];
@@ -26,18 +20,26 @@ tulaj T[]={{"Janoki Lilla","G4O424",0},{"Ori Viktoria","KH12Q2",0},{"Soos Brigit
 vendeg V[12]={{"Gipsz Jakab","AAAAAA",0},{"John Doe","BBBBBB",0},{"Valaki Valami","CCCCCC",0},{"Michael Jackson","DDDDDD",2},{"Selena Gomez","EEEEEE",3},{"Palvin Barbara","FFFFFF",3}};
 byte buttonState = 0; 
 byte n = 10;
+
 void setup() {
+  
   Serial.begin(9600);
+   Serial.println("CLEARSHEET"); 
+   Serial.println("CLEARDATA"); 
+   Serial.println("LABEL,Date,Time,Name,Neptun,Jogok");
   for(byte i =0; i<4; i++){
     pinMode(myLed[i].buttonPin, INPUT );
     pinMode (myLed[i].ledPin,OUTPUT );
   }
-
+  
   for(byte i =0; i<12; i++){
     if(T[V[i].tulaj].vdb < 3){
       T[V[i].tulaj].vdb = T[V[i].tulaj].vdb+1;
     }
   }
+  
+
+  Serial.println("RESETTIMER"); 
 }
 
 void loop() {
@@ -48,34 +50,45 @@ void loop() {
       switch(i){
         case 0:
           n = random(4);
-          Serial.print( T[n].nev);
-          Serial.print(";");
-          Serial.print( T[n].nept);
-          Serial.print(";");
-          Serial.print( "tulaj");
-          Serial.print( "\n");
+          Serial.print("DATA,DATE,TIME,");
+          Serial.print(T[n].nev);
+          Serial.print(",");
+          Serial.print(T[n].nept);
+          Serial.print(",");
+          Serial.println("Tulaj");
+
           delay(2000);
           break;
         case 2:
           n = random(6);
+          /*Serial.print("DATE");
           Serial.print( V[n].nev);
           Serial.print(";");
           Serial.print( V[n].nept);
           Serial.print(";");
           Serial.print( T[V[n].tulaj].nev);
-          Serial.print( "\n");
+          Serial.print( "\n");*/
+
+          Serial.print("DATA,DATE,TIME,");
+          Serial.print(V[n].nev);
+          Serial.print(",");
+          Serial.print(V[n].nept);
+          Serial.print(",");
+          Serial.println(T[V[n].tulaj].nev);
           delay(2000);
           break;
         case 1:
+          Serial.print("DATA,DATE,TIME,");
           Serial.print("idegen");
-          Serial.print(";");
+          Serial.print(",");
           Serial.print("idegen");
-          Serial.print(";");
-          Serial.print("idegen");
-          Serial.print( "\n");
+          Serial.print(",");
+          Serial.println("idegen");
+          
           delay(2000);
           break;
       }
+
       
       
     }else{
