@@ -4,6 +4,7 @@ byte motorPin3=8;
 byte motorPin4=6;
 byte motorPin5=5;
 byte motorPin6=3;
+
 struct tulaj{
   char nev[30];
   char nept[7];
@@ -69,6 +70,8 @@ void loop() {
           Serial.print(",");
           Serial.print(T[n].nept);
           Serial.print(",");
+          Serial.print("nincs");
+          Serial.print(",");
           Serial.println("Tulaj");
           open();
           delay(2000);
@@ -82,7 +85,9 @@ void loop() {
           Serial.print(",");
           Serial.print(V[n].nept);
           Serial.print(",");
-          Serial.println(T[V[n].tulaj].nev);
+          Serial.print(T[V[n].tulaj].nev);
+          Serial.print(",");
+          Serial.println("vendeg");
           open();
           delay(2000);
           break;
@@ -92,7 +97,9 @@ void loop() {
           Serial.print(",");
           Serial.print("idegen");
           Serial.print(",");
-          Serial.println("idegen");
+          Serial.print("nincs");
+          Serial.print(",");
+          Serial.println("nincs");
           delay(2000);
           break;
       }
